@@ -24,54 +24,51 @@ public class MainService {
     @Autowired
     RatingRepository ratingRepository;
 
-//  public Restaurant addRestaurant(Restaurant restaurant) {
-//  return restaurantRepository.save(restaurant);
-//}
-//
-//public Customer addCustomer(Customer customer) {
-//  return customerRepository.save(customer);
-//}
-
     public void addRestaurant(Restaurant restaurant) {
-        restaurantRepository.save(restaurant);
+	restaurantRepository.save(restaurant);
     }
 
     public void addCustomer(Customer customer) {
-        customerRepository.save(customer);
+	customerRepository.save(customer);
     }
 
     public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+	return customerRepository.findAll();
     }
 
     public void addRatingForRestaurantByCustomer(double ratingValue, Integer customerId, String restaurantName) {
-        Customer customer = this.getCustomerById(customerId);
-        Restaurant restaurant = this.getRestaurantByName(restaurantName);
+	Customer customer = this.getCustomerById(customerId);
+	Restaurant restaurant = this.getRestaurantByName(restaurantName);
 
-        Rating rating = new Rating();
-        rating.setRating(ratingValue);
-        rating.setRestaurant(restaurant);
+	Rating rating = new Rating();
+	rating.setRating(ratingValue);
+	rating.setRestaurant(restaurant);
 
-        customer.getRatings().add(rating);
-        customer.getVisitedRestaurants().add(restaurant);
+	customer.getRatings().add(rating);
+	customer.getVisitedRestaurants().add(restaurant);
 
-        ratingRepository.save(rating);
+	ratingRepository.save(rating);
     }
 
     private Customer getCustomerById(Integer customerId) {
-        return customerRepository.findById(customerId).get();
+	return customerRepository.findById(customerId).get();
     }
 
     public List<Rating> getAllRatings() {
-        return ratingRepository.findAll();
+	return ratingRepository.findAll();
     }
 
     public List<Customer> findAllByVisitedRestaurant(String restaurantName) {
-        Restaurant restaurant = this.getRestaurantByName(restaurantName);
-        return customerRepository.findByVisitedRestaurants(restaurant);
+	Restaurant restaurant = this.getRestaurantByName(restaurantName);
+	return customerRepository.findByVisitedRestaurants(restaurant);
     }
 
     private Restaurant getRestaurantByName(String restaurantName) {
-        return restaurantRepository.findByName(restaurantName);
+	return restaurantRepository.findByName(restaurantName);
     }
+
+    public List<Customer> findByVisitedRestaurantAndRatingGreaterThan(String restaurantName, double rating) {
+	return customerRepository.findByVisitedRestaurantAndRatingGreaterThan(restaurantName, rating);
+    }
+
 }

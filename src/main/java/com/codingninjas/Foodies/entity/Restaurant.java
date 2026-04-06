@@ -12,46 +12,37 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Restaurant {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	
-	@OneToMany(mappedBy="restaurant")
-	@JsonManagedReference
-	private List<Rating> ratings;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-//  @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//  @JsonManagedReference(value = "restaurant-ratings")
-//  private List<Rating> ratings;
-//
-//  @ManyToMany(mappedBy = "visitedRestaurants", fetch = FetchType.LAZY)
-//  @JsonBackReference(value = "customer-restaurants")
-//  private List<Customer> customers;
-	
-	private String name;
+    @OneToMany(mappedBy = "restaurant")
+    @JsonManagedReference
+    private List<Rating> ratings;
 
-	public String getName() {
-		return name;
-	}
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+	return id;
+    }
 
-	public List<Rating> getRatings() {
-		return ratings;
-	}
+    public void setId(int id) {
+	this.id = id;
+    }
 
-	public void setRatings(List<Rating> ratings) {
-		this.ratings = ratings;
-	} 
+    public List<Rating> getRatings() {
+	return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+	this.ratings = ratings;
+    }
 }

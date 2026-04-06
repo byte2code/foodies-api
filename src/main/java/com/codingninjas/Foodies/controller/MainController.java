@@ -14,47 +14,48 @@ import com.codingninjas.Foodies.service.MainService;
 
 @RestController
 public class MainController {
-	
-	@Autowired
-	MainService service;
-	
-	@PostMapping("/Restaurant/add")
-	public void addRestaurant(@RequestBody Restaurant restaurant) {
-		service.addRestaurant(restaurant);
-	}
-//  @PostMapping("/Restaurant/add")
-//  public Restaurant addRestaurant(@RequestBody Restaurant restaurant) {
-//      return mainService.addRestaurant(restaurant);
-//  }
-	
-	@PostMapping("/Customer/add")
-	public void addCustomer(@RequestBody Customer customer) {
-		System.out.println("customer is " + customer.getName());
-		service.addCustomer(customer);
-	}
-//  @PostMapping("/Customer/add")
-//  public Customer addCustomer(@RequestBody Customer customer) {
-//      return mainService.addCustomer(customer);
-//  }
-	
-	@PostMapping("/Rating/{customerId}/add/{restaurantName}")
-	public void addRatingForRestaurantByCustomer(@RequestBody Rating rating,@PathVariable Integer customerId, @PathVariable String restaurantName) {
-		service.addRatingForRestaurantByCustomer(rating.getRating(),customerId,restaurantName);
-	}
-	
-	@GetMapping("/ratings")
-	public List<Rating> getAllRatings() {
-		return service.getAllRatings();
-	}
-	
-	@GetMapping("/customers")
-	public List<Customer> getAllCustomers(){
-		return service.getAllCustomers();
-	}
-	
-	@GetMapping("/customers/restaurant/{restaurantName}")
-	public List<Customer> findAllByVisitedRestaurant(@PathVariable String restaurantName){
-		return service.findAllByVisitedRestaurant(restaurantName);
-	}
-	
+
+    @Autowired
+    MainService service;
+
+    @PostMapping("/Restaurant/add")
+    public void addRestaurant(@RequestBody Restaurant restaurant) {
+	service.addRestaurant(restaurant);
+    }
+
+    @PostMapping("/Customer/add")
+    public void addCustomer(@RequestBody Customer customer) {
+	System.out.println("customer is " + customer.getName());
+	service.addCustomer(customer);
+    }
+
+    @PostMapping("/Rating/{customerId}/add/{restaurantName}")
+    public void addRatingForRestaurantByCustomer(@RequestBody Rating rating, @PathVariable Integer customerId,
+	    @PathVariable String restaurantName) {
+	service.addRatingForRestaurantByCustomer(rating.getRating(), customerId, restaurantName);
+    }
+
+    @GetMapping("/ratings")
+    public List<Rating> getAllRatings() {
+	return service.getAllRatings();
+    }
+
+    @GetMapping("/customers")
+    public List<Customer> getAllCustomers() {
+	return service.getAllCustomers();
+    }
+
+    @GetMapping("/customers/restaurant/{restaurantName}")
+    public List<Customer> findAllByVisitedRestaurant(@PathVariable String restaurantName) {
+	return service.findAllByVisitedRestaurant(restaurantName);
+    }
+    
+    @GetMapping("/customers/restaurant/{restaurantName}/{rating}")
+    public List<Customer> findByVisitedRestaurantAndRatingGreaterThan(
+        @PathVariable String restaurantName,
+        @PathVariable double rating) {
+        return service.findByVisitedRestaurantAndRatingGreaterThan(restaurantName, rating);
+    }
+
+
 }
