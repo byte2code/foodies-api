@@ -2,6 +2,23 @@
 
 All notable changes to this project are documented in this file.
 
+## [v4.0.0] - 2026-04-07
+
+### Summary
+Fourth version of the Foodies API that adds restaurant average-rating lookup using a native SQL query.
+
+### Highlights
+
+- Added `GET /restaurant/{restaurantName}/average` to fetch a restaurant's average rating.
+- Added `findAverageRatingByRestaurantName(...)` in `RatingRepository` using a native query.
+- Added `getAverageRatingForRestaurant(...)` in the service layer.
+- Returned `0.0` when a restaurant has no ratings yet.
+- Refreshed the README to present the project as a broader query-focused relationship showcase.
+
+### Notes
+
+This version strengthens the project as a learning showcase by combining derived-query, JPQL, and native-query patterns in the same restaurant-rating API.
+
 ## [v3.0.0] - 2026-04-07
 
 ### Summary

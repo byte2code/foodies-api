@@ -49,13 +49,16 @@ public class MainController {
     public List<Customer> findAllByVisitedRestaurant(@PathVariable String restaurantName) {
 	return service.findAllByVisitedRestaurant(restaurantName);
     }
-    
+
     @GetMapping("/customers/restaurant/{restaurantName}/{rating}")
-    public List<Customer> findByVisitedRestaurantAndRatingGreaterThan(
-        @PathVariable String restaurantName,
-        @PathVariable double rating) {
-        return service.findByVisitedRestaurantAndRatingGreaterThan(restaurantName, rating);
+    public List<Customer> findByVisitedRestaurantAndRatingGreaterThan(@PathVariable String restaurantName,
+	    @PathVariable double rating) {
+	return service.findByVisitedRestaurantAndRatingGreaterThan(restaurantName, rating);
     }
 
+    @GetMapping("/restaurant/{restaurantName}/average")
+    public Double getAverageRatingForRestaurant(@PathVariable String restaurantName) {
+	return service.getAverageRatingForRestaurant(restaurantName);
+    }
 
 }

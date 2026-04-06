@@ -1,10 +1,10 @@
 # Foodies API
 
-Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, derived-query and JPQL lookups, and relationship-focused service design.
+Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, derived-query, JPQL, and native-query lookups.
 
 ## Overview
 
-This project demonstrates a compact Spring Boot API for a food-review style workflow. It models customers, restaurants, and ratings, and shows how entity relationships can be updated together when a customer rates a restaurant and builds a visited-restaurants history. This version also adds both derived-query and JPQL-based customer lookup options for restaurant-specific discovery.
+This project demonstrates a compact Spring Boot API for a food-review style workflow. It models customers, restaurants, and ratings, and shows how entity relationships can be updated together when a customer rates a restaurant and builds a visited-restaurants history. This version extends the project with restaurant average-rating lookup so the API now covers both relationship-driven writes and query-driven restaurant insights.
 
 ## Concepts and Features Covered
 
@@ -20,9 +20,9 @@ This project demonstrates a compact Spring Boot API for a food-review style work
 - `GET` endpoint for retrieving all ratings
 - `GET` endpoint for retrieving all customers
 - Derived query for retrieving customers who visited a given restaurant
-- `GET` endpoint for retrieving customers by restaurant name
-- JPQL query for retrieving customers who rated a restaurant above a threshold
-- `GET` endpoint for retrieving customers by restaurant name and minimum rating
+- JPQL query for retrieving customers by restaurant name and minimum rating
+- Native query for calculating average rating by restaurant name
+- `GET` endpoint for retrieving average rating for a restaurant
 - Bidirectional relationship handling with JSON serialization controls
 
 ## Tech Stack
@@ -34,28 +34,6 @@ This project demonstrates a compact Spring Boot API for a food-review style work
 - H2 Database
 - Maven
 - JUnit 5
-
-## Project Structure
-
-```text
-foodies-api/
-├── CHANGELOG.md
-├── README.md
-├── pom.xml
-├── mvnw
-├── mvnw.cmd
-└── src/
-    ├── main/
-    │   ├── java/com/codingninjas/Foodies/
-    │   │   ├── controller/
-    │   │   ├── entity/
-    │   │   ├── repository/
-    │   │   ├── service/
-    │   │   └── FoodiesApplication.java
-    │   └── resources/
-    │       └── application.yml
-    └── test/
-```
 
 ## How to Run
 
@@ -73,6 +51,7 @@ Available endpoints:
 - `GET /customers`
 - `GET /customers/restaurant/{restaurantName}`
 - `GET /customers/restaurant/{restaurantName}/{rating}`
+- `GET /restaurant/{restaurantName}/average`
 
 Example request body for creating a restaurant:
 
@@ -102,12 +81,11 @@ Example request body for adding a rating:
 
 - Demonstrates how to manage multiple related entities in a single service flow
 - Shows relationship updates across customers, restaurants, and ratings
-- Introduces a practical derived-query example for many-to-many based lookup
-- Adds a JPQL-based filtering query for restaurant-specific customer rating analysis
-- Uses JSON reference annotations to avoid recursive serialization issues
+- Combines derived-query, JPQL, and native-query examples in one compact API
+- Adds aggregate-style average-rating lookup for restaurant-level insight
 - Keeps persistence in H2 so the project is easy to run and explore locally
 
 ## GitHub Metadata
 
-- Suggested repository description: `Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, plus derived-query and JPQL-based customer restaurant lookups.`
-- Suggested topics: `java`, `java-17`, `spring-boot`, `spring-data-jpa`, `h2-database`, `rest-api`, `foodies`, `restaurant-ratings`, `derived-query`, `jpql`, `maven`, `learning-project`, `portfolio-project`
+- Suggested repository description: `Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, plus derived-query, JPQL, and native-query lookups.`
+- Suggested topics: `java`, `java-17`, `spring-boot`, `spring-data-jpa`, `h2-database`, `rest-api`, `foodies`, `restaurant-ratings`, `derived-query`, `jpql`, `native-query`, `maven`, `learning-project`, `portfolio-project`

@@ -71,4 +71,10 @@ public class MainService {
 	return customerRepository.findByVisitedRestaurantAndRatingGreaterThan(restaurantName, rating);
     }
 
+    public Double getAverageRatingForRestaurant(String restaurantName) {
+	Double avg = ratingRepository.findAverageRatingByRestaurantName(restaurantName);
+	// Handle null case if no ratings exist
+	return avg != null ? avg : 0.0;
+    }
+
 }
