@@ -1,46 +1,60 @@
 package com.codingninjas.Foodies.controller;
 
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import com.codingninjas.Foodies.entity.Customer;
 import com.codingninjas.Foodies.entity.Rating;
 import com.codingninjas.Foodies.entity.Restaurant;
 import com.codingninjas.Foodies.service.MainService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
-@RequestMapping("/")
 public class MainController {
-
-    @Autowired
-    private MainService mainService;
-
-    @PostMapping(value = "/Restaurant/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> addRestaurant(@RequestBody Restaurant restaurant) {
-	return ResponseEntity.ok(mainService.addRestaurant(restaurant));
-    }
-
-    @PostMapping(value = "/Customer/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-	return ResponseEntity.ok(mainService.addCustomer(customer));
-    }
-
-    @PostMapping(value = "/Rating/{customerId}/add/{restaurantName}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Rating> addRating(@RequestBody Rating rating, @PathVariable Integer customerId,
-	    @PathVariable String restaurantName) {
-	return ResponseEntity.ok(mainService.addRating(customerId, restaurantName, rating));
-    }
-
-    @GetMapping("/ratings")
-    public ResponseEntity<List<Rating>> getAllRatings() {
-	return ResponseEntity.ok(mainService.getAllRatings());
-    }
-
-    @GetMapping("/customers")
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-	return ResponseEntity.ok(mainService.getAllCustomers());
-    }
+	
+	@Autowired
+	MainService service;
+	
+	@PostMapping("/Restaurant/add")
+	public void addRestaurant(@RequestBody Restaurant restaurant) {
+		service.addRestaurant(restaurant);
+	}
+//  @PostMapping("/Restaurant/add")
+//  public Restaurant addRestaurant(@RequestBody Restaurant restaurant) {
+//      return mainService.addRestaurant(restaurant);
+//  }
+	
+	@PostMapping("/Customer/add")
+	public void addCustomer(@RequestBody Customer customer) {
+		System.out.println("customer is " + customer.getName());
+		service.addCustomer(customer);
+	}
+//  @PostMapping("/Customer/add")
+//  public Customer addCustomer(@RequestBody Customer customer) {
+//      return mainService.addCustomer(customer);
+//  }
+	
+	@PostMapping("/Rating/{customerId}/add/{restaurantName}")
+	public void addRatingForRestaurantByCustomer(@RequestBody Rating rating,@PathVariable Integer customerId, @PathVariable String restaurantName) {
+		service.addRatingForRestaurantByCustomer(rating.getRating(),customerId,restaurantName);
+	}
+	
+	@GetMapping("/ratings")
+	public List<Rating> getAllRatings() {
+		return service.getAllRatings();
+	}
+	
+	@GetMapping("/customers")
+	public List<Customer> getAllCustomers(){
+		return service.getAllCustomers();
+	}
+	
+	@GetMapping("/customers/restaurant/{restaurantName}")
+	public List<Customer> findAllByVisitedRestaurant(@PathVariable String restaurantName){
+		return service.findAllByVisitedRestaurant(restaurantName);
+	}
+	
 }

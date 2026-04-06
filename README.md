@@ -1,10 +1,10 @@
 # Foodies API
 
-Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, and relationship-focused service design.
+Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, derived-query lookups, and relationship-focused service design.
 
 ## Overview
 
-This project demonstrates a compact Spring Boot API for a food-review style workflow. It models customers, restaurants, and ratings, and shows how entity relationships can be updated together when a customer rates a restaurant and builds a visited-restaurants history.
+This project demonstrates a compact Spring Boot API for a food-review style workflow. It models customers, restaurants, and ratings, and shows how entity relationships can be updated together when a customer rates a restaurant and builds a visited-restaurants history. This version also adds a repository-driven lookup for finding customers by restaurant visits.
 
 ## Concepts and Features Covered
 
@@ -19,6 +19,8 @@ This project demonstrates a compact Spring Boot API for a food-review style work
 - `POST` endpoint for adding a rating for a restaurant by a customer
 - `GET` endpoint for retrieving all ratings
 - `GET` endpoint for retrieving all customers
+- Derived query for retrieving customers who visited a given restaurant
+- `GET` endpoint for retrieving customers by restaurant name
 - Bidirectional relationship handling with JSON serialization controls
 
 ## Tech Stack
@@ -67,6 +69,7 @@ Available endpoints:
 - `POST /Rating/{customerId}/add/{restaurantName}`
 - `GET /ratings`
 - `GET /customers`
+- `GET /customers/restaurant/{restaurantName}`
 
 Example request body for creating a restaurant:
 
@@ -96,10 +99,11 @@ Example request body for adding a rating:
 
 - Demonstrates how to manage multiple related entities in a single service flow
 - Shows relationship updates across customers, restaurants, and ratings
+- Introduces a practical derived-query example for many-to-many based lookup
 - Uses JSON reference annotations to avoid recursive serialization issues
 - Keeps persistence in H2 so the project is easy to run and explore locally
 
 ## GitHub Metadata
 
-- Suggested repository description: `Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, and relationship-focused service design.`
-- Suggested topics: `java`, `java-17`, `spring-boot`, `spring-data-jpa`, `h2-database`, `rest-api`, `foodies`, `restaurant-ratings`, `maven`, `learning-project`, `portfolio-project`
+- Suggested repository description: `Spring Boot REST API for managing restaurants, customers, and ratings with JPA, H2 persistence, plus derived-query based customer lookup by restaurant visit.`
+- Suggested topics: `java`, `java-17`, `spring-boot`, `spring-data-jpa`, `h2-database`, `rest-api`, `foodies`, `restaurant-ratings`, `derived-query`, `maven`, `learning-project`, `portfolio-project`
